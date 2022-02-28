@@ -15,7 +15,6 @@ from Players.SlowPlayer import SlowPlayer
 from Players.RandomPlayer import RandomPlayer
 from Game.BriscaGame import BriscaGame
 from Players.NOTLAPlayer import NOTLAPlayer
-from Players.NOTLAPlayer2 import NOTLAPlayer2
 
 
 # ---------------------------------------------------------------------------
