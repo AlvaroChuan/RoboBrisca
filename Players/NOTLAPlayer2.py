@@ -14,8 +14,7 @@ class NOTLAPlayer2(Player):
 
     def think(self, observation, budget):
         list_actions = observation.get_list_actions()
-        values = []
-        player_id = observation.turn()
+        player_id = observation.turn
         pos = observation.playing_cards.len()
         best_value = -math.inf
         best_action = None
@@ -28,7 +27,6 @@ class NOTLAPlayer2(Player):
         for action in list_actions:
             new_obs = observation.clone()
             score = self.forward_model.play(new_obs, action, self.heuristic)
-            pos += 1
             i = 0
             other_player = player_id + 1
             while i < 3:
@@ -41,7 +39,6 @@ class NOTLAPlayer2(Player):
                 if value >= best_value:
                     best_action = other_action
                     best_value = value
-                pos += 1
                 other_player += 1
                 i += 1
 
