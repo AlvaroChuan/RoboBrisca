@@ -38,7 +38,7 @@ if __name__ == '__main__':
     player_id_as_first = random.choice(range(game_state.n_players))        # who starts is determined randomly
     game.reset(game_state, player_id_as_first)                             # Game initialization
 
-    l_players = [NOTLAPlayer(), OSLAPlayer()]    # list of Players
+    l_players = [NOTLAPlayer2(), OSLAPlayer()]    # list of Players
 
     if save_game:
         game.save_game_on(save_name)
