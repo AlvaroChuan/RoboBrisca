@@ -16,31 +16,34 @@ class NOTLAPlayer2(Player):
         list_actions = observation.get_list_actions()
         player_id = observation.turn
         pos = observation.playing_cards.len()
+        pos_initial = pos
         best_value = -math.inf
         best_action = None
 
-        if pos == 0 or pos == 2:
+        if pos_initial == 0 or pos_initial == 2:
             factor = 1
         else:
             factor = -1
-
+        other_player = player_id
         for action in list_actions:
             new_obs = observation.clone()
-            score = self.forward_model.play(new_obs, action, self.heuristic)
-            i = 0
-            other_player = player_id + 1
-            while i < 3:
+            score_player = self.forward_model.play(new_obs, action, self.heuristic)
+            if other_player == 3:
+                other_player = 0
+            else:
+                other_player += 1
+            while pos < 3:
+                pos += 1
                 if other_player == 4:
                     other_player = 0
-                other_card = new_obs.hands[other_player].get_card(random.choice(range(3)))          # Selecciona una carta al azar de otro jugador
+                other_card = new_obs.hands[other_player].get_card(random.choice(range(new_obs.hands[other_player].len())))          # Selecciona una carta al azar de otro jugador
                 other_action = Action(other_card)                                                   # Transfoma la carta elegida a una acción
                 score = self.forward_model.play(new_obs, other_action, self.heuristic)              # Juega la carta del otro jugador
-                value = score * factor
+                value = score + score_player * factor
                 if value >= best_value:
                     best_action = other_action
                     best_value = value
                 other_player += 1
-                i += 1
 
         return best_action
 
