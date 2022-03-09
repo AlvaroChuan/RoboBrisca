@@ -1,8 +1,4 @@
-# --------------------------------------------------------
-# - RoboBrisca
-# - BriscaGame
-# - Implemented by: Raul Montoliu (Dic 2021)
-# --------------------------------------------------------
+
 from Game.Common import is_better_card
 
 
