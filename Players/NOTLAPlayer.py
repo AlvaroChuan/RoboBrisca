@@ -24,7 +24,6 @@ class NOTLAPlayer(Player):
 
         for i in range(5000):
             for action in list_actions:
-
                 new_obs = observation.clone()
                 score = self.forward_model.play(new_obs, action, self.heuristic)
                 turn_heuristic.append(score)
